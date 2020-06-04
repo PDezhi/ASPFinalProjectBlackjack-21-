@@ -1,0 +1,308 @@
+
+/* General */
+body {
+    color: white;
+    background-color: #052522;
+}
+
+.body-content { /* for all pages */
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.index-page-container,
+.placebet-page-container,
+.game-page-container,
+.about-page-container,
+.contact-page-container {
+    padding: 120px 30px 20px 30px;
+    background-size: cover;
+    min-height: 870px;
+    background-image: url(../images/blackjack-table.jpg);
+}
+
+.game-page-container {
+    background-image: url(../images/blackjack-table-clean.jpg);
+    padding-top: 80px;
+}
+
+footer {
+    background-color: #222222;
+    padding: 20px 50px;
+}
+
+    footer p, a, a:hover {
+        color: #9d9d9d;
+    }
+
+
+.my-wide-button {
+    min-width: 100px !important;
+}
+
+
+
+/* Index, About */
+
+.my-index-title {
+}
+
+.my-index-desc {
+    padding-bottom: 15px;
+}
+
+#instructions {
+    padding: 40px 15px 0 15px;
+}
+
+#about {
+    padding: 52px 15px 0 15px;
+}
+
+.my-about-desc {
+    line-height: 1.3em;
+}
+
+
+
+/* Placebet */
+.my-placebet-title {
+}
+
+.my-placebet-desc {
+    padding-top: 15px;
+}
+
+.my-center-input-div {
+    max-width: 150px;
+    margin: 10px auto 20px auto;
+}
+
+.my-center-error-div {
+    max-width: 500px !important;
+    margin: 20px auto;
+}
+
+#betting-rules {
+    padding-top: 90px
+}
+
+#chips-image {
+    margin: -30px 0 -60px 0;
+}
+
+
+
+/* Game */
+.my-game-rows {
+    min-height: 245px;
+}
+
+.game-middle-column {
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    min-height: 220px;
+    border: 1px solid yellow;
+    border-radius: 10px;
+}
+
+.my-vertical-center {
+    padding-top: 90px;
+}
+
+.my-status-message {
+    color: yellow;
+    padding-bottom: 10px;
+    -webkit-animation: zoomIn 1.5s ease-out;
+    animation: zoomIn 1.5s ease-out;
+}
+
+@-webkit-keyframes zoomIn {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.my-hand-value {
+    padding: 10px;
+    color: yellow;
+    font-weight: bold;
+}
+
+.card-image {
+    -webkit-box-shadow: -5px 0px 10px -2px black;
+    box-shadow: -5px 0px 10px -2px black;
+    display: inline;
+}
+
+    /* The First Card in Hand */
+    .card-image:nth-of-type(1) {
+        /* box-shadow: 0 0 0 0 black; */
+    }
+
+    /* Every Other Card in Hand */
+    .card-image:not(:first-of-type) {
+        margin-left: -117px;
+    }
+
+.my-dealer-cards {
+    overflow: hidden;
+    height: 225px;
+}
+
+    .my-dealer-cards .card-image:nth-of-type(3) {
+        -webkit-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-name: slideIn;
+        animation-name: slideIn;
+    }
+
+.my-player-cards, .my-player-cards-no-animation {
+    overflow: hidden;
+    height: 225px;
+}
+
+    .my-player-cards .card-image:last-of-type {
+        -webkit-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-name: slideIn;
+        animation-name: slideIn;
+    }
+
+@-webkit-keyframes slideIn {
+    from {
+        margin-left: 30%;
+    }
+
+    to {
+        margin-left: -117px;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        margin-left: 30%;
+    }
+
+    to {
+        margin-left: -117px;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .h1, .h3 {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .game-page-container {
+        min-height: unset;
+    }
+
+        .game-page-container .my-vertical-center,
+        .game-page-container .h3 {
+            font-size: 1em;
+        }
+
+        .game-page-container .h1 {
+            font-size: 2em;
+        }
+
+        .game-page-container .my-text-sm-right {
+            text-align: right;
+            padding-right: 0;
+        }
+
+        .game-page-container .my-text-sm-left {
+            text-align: left;
+            padding-left: 0;
+        }
+
+        .game-page-container .btn-lg {
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+        }
+
+        .game-page-container .form-group {
+            margin: 0 !important;
+        }
+
+        .game-page-container .my-vertical-center {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-bottom: 0;
+        }
+
+        .game-page-container .my-game-rows {
+            min-height: unset;
+        }
+
+        .game-page-container .my-hand-value {
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .game-page-container .game-middle-column {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px 10px 15px 10px;
+            min-height: unset;
+        }
+
+    /* Cards */
+
+    .my-dealer-cards, .my-player-cards, .my-player-cards-no-animation {
+        height: unset;
+        overflow: visible;
+    }
+
+        .my-dealer-cards .card-image:nth-of-type(3), .my-player-cards .card-image:last-of-type {
+            animation-name: unset;
+        }
+
+    .my-cards-container {
+        /*        max-width: 300px;*/
+        max-width: 150px; /* smaller cards on phones */
+        margin: 0 auto;
+    }
+
+    .card-image {
+        max-width: 80px !important; /* smaller cards on phones */
+        display: inline;
+        margin-left: 0 !important;
+        margin-top: -88px;
+    }
+
+        /* The 1st and 2nd cards */
+        .card-image:first-of-type, .card-image:nth-of-type(2) {
+            margin-top: 0;
+        }
+
+        /* Even cards */
+        .card-image:nth-of-type(2n+2) {
+            /* margin-left: -117px !important; */
+            margin-left: -65px !important; /* smaller cards on phones */
+        }
+}

@@ -1,0 +1,147 @@
+﻿@model BlackJack.ViewModels.GameViewModel
+
+@{
+    ViewData["Title"] = "Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Mode = "Prod"; // Production: "Prod" | Development: "Dev"
+}
+
+<div class="game-page-container">
+    <div class="row">
+        <div class="col">
+
+            <!-- ROW 1 -->
+            <div class="row my-game-rows">
+                <div class="col-xs-12 col-sm-3 h3 my-vertical-center">
+                    <p>Dealer</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 my-dealer-cards" id="my-dealer-cards">
+                    <div class="my-cards-container">
+                        @if (Model.GameStatus == Status.ONGOING)
+                        {
+                            <img src="/images/deck/CARD_BACK.jpg" alt="Hidden-Card" class="img-responsive card-image" />
+                        }
+
+                        @for (int i = (Model.GameStatus == Status.ONGOING) ? 1 : 0; i < Model.DealerHand.Cards.Count; i++)
+                        {
+                            string imgUrl = "/images/deck/" + @Model.DealerHand.Cards[i].Suit + "_" + @Model.DealerHand.Cards[i].Rank + ".jpg";
+                            <img src="@imgUrl" alt="@Model.DealerHand.Cards[i].Rank-of-@Model.DealerHand.Cards[i].Suit" class="img-responsive card-image" />
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-3 h3 my-vertical-center">
+                    <div class="row">
+                        <div class="col-xs-7 my-text-sm-right col-sm-12">Hand Value:</div>
+                        <div class="col-xs-5 my-text-sm-left col-sm-12">
+                            @if (Model.GameStatus == Status.ONGOING) // display dealer's hand value minus the hidden card
+                            {
+                                <span class="my-hand-value">@Html.DisplayFor(model => model.DealerHandValueToDisplay)</span>
+                            }
+                            else // display dealer's total hand value
+                            {
+                                <span class="my-hand-value">@Html.DisplayFor(model => model.DealerHand.Value)</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 2 -->
+            <div class="row my-game-rows">
+                <div class="col-xs-12 col-sm-3 my-vertical-center">
+                    @if (Model.GameStatus == Status.ONGOING)
+                    {
+                        @using (Html.BeginForm("Game", "Home", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                <input type="hidden" name="playerAction" id="hit" value="Hit" />
+                                <input type="submit" value="Hit" class="btn btn-success btn-lg my-wide-button" />
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 game-middle-column">
+                    @if (Model.GameStatus == Status.ONGOING)
+                    {
+                        <p class="h3">Your Bet: @Html.DisplayFor(model => model.Bet)</p>
+                    }
+                    <p class="h3">Your Balance: @Html.DisplayFor(model => model.PlayerBalance)</p>
+                    @if (Model.GameStatus != Status.ONGOING)
+                    {
+                        <div class="h1 my-status-message">
+                            @ViewBag.EndGameMessage
+                        </div>
+
+                        @if (Model.PlayerBalance == 0)
+                        {
+                            @using (Html.BeginForm("Game", "Home", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <input type="hidden" name="playerAction" id="game-over" value="GameOver" />
+                                    <input type="submit" value="Game Over" class="btn btn-danger btn-lg my-wide-button" />
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            @using (Html.BeginForm("Game", "Home", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <input type="hidden" name="playerAction" id="hit" value="PlayAgain" />
+                                    <input type="submit" value="Play Again" class="btn btn-success btn-lg my-wide-button" />
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+                <div class="col-xs-12 col-sm-3 my-vertical-center">
+                    @if (Model.GameStatus == Status.ONGOING)
+                    {
+                        @using (Html.BeginForm("Game", "Home", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                <input type="hidden" name="playerAction" id="stand" value="Stand" />
+                                <input type="submit" value="Stand" class="btn btn-success btn-lg my-wide-button" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+
+            <!-- ROW 3 -->
+            <div class="row my-game-rows">
+                <div class="col-xs-12 col-sm-3 col-sm-push-9 h3 my-vertical-center">
+                    <div class="row">
+                        <div class="col-xs-7 my-text-sm-right col-sm-12">Hand Value:</div>
+                        <div class="col-xs-5 my-text-sm-left col-sm-12"><span class="my-hand-value">@Html.DisplayFor(model => model.PlayerHand.Value)</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 my-player-cards" id="my-player-cards">
+
+                    @if (ViewBag.Stand == true) // disable player card animation, since they did not change
+                    {
+                        <script>
+                            var element = document.getElementById("my-player-cards");
+                            element.classList.remove("my-player-cards");
+                            element.classList.add("my-player-cards-no-animation");
+                        </script>
+                    }
+                    <div class="my-cards-container">
+                        @foreach (Card card in Model.PlayerHand.Cards)
+                        {
+                            string imgUrl = "/images/deck/" + @card.Suit + "_" + @card.Rank + ".jpg";
+                            <img src="@imgUrl" alt="@card.Rank-of-@card.Suit" class="img-responsive card-image" />
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-sm-pull-9 h3 my-vertical-center">
+                    <p>Player</p>
+                </div>
+            </div>
+
+ 
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="index-page-container">
+        <div class="row">
+            <div class="col">
+                <h1 class="my-index-title">Welcome to BlackJack!</h1>
+
+                <h3 class="my-index-desc">Start a New Game</h3>
+
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="start" id="start" value="true" />
+                        <input type="submit" value="Start" class="btn btn-warning btn-lg my-wide-button" />
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,46 @@
+﻿@*@model BlackJack.Models.Player*@
+@*Your Balance: @Html.DisplayFor(model => model.Balance)*@
+
+
+@{
+    ViewData["Title"] = "PlaceBet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="placebet-page-container">
+    <div class="row">
+        <div class="col">
+            <h2 class="my-placebet-title">Place Your Bet</h2>
+
+            <h4 class="my-placebet-desc">Your Balance: @ViewBag.Balance</h4>
+
+            @{int maxBet = ViewBag.Balance < 100 ? ViewBag.Balance : 100; }
+
+            @using (Html.BeginForm("PlaceBet", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div class="row ">
+                        <div class="col">
+                            <div class="my-center-input-div">
+                                <input type="number" min="1" max="@maxBet" name="bet" id="bet" class="form-control" required />
+                            </div>
+                            @if (@ViewBag.ErrorMessage != "")
+                            {
+                                <div class="alert alert-danger my-center-error-div">@ViewBag.ErrorMessage</div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" value="Place Bet" class="btn btn-warning btn-lg my-wide-button" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+</div>
